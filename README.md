@@ -8,14 +8,11 @@ Django as backend and Vue as static builder instance.
 **Deploy** with vue as builder image that passes the static directory
 as artifact, to the django application.
 
-*Django is responsible for the logic and defines through views what files
-and assets to present to the user, when recieving a http request.*
+Django is responsible for the logic and defines through views what files
+and assets to present to the user, when recieving a http request.
 
-*The open question for now would be how to pass variables to the frontend
-for dynamic content.*
-
-
-*One idea might be to have a dedicated api endpoint next to the regular application
+> *The open question for now would be how to pass variables to the frontend
+for dynamic content. One idea might be to have a dedicated api endpoint next to the regular application
 endpoint. Then I use asynchronous resource requests, through the MDN fetch API,
 for dynamic content.*
 
