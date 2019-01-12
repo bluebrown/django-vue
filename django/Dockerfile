@@ -17,3 +17,4 @@ RUN chsh -s /usr/bin/zsh && \
 RUN git clone https://github.com/bluebrown/dotfiles.git  ~/dotfiles && \
     /bin/bash -c '~/dotfiles/fiddle.sh -zv'
 
+WORKDIR /application
