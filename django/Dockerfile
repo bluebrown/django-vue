@@ -18,7 +18,4 @@ WORKDIR /application/
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY ./.vim /root/.vim
-RUN chmod -u+x ~/.vim/pack/fetch.sh && \
-    ~/.vim/pack/fetch.sh
-
+RUN git clone --recursive https://github.com/bluebrown/vim-alpine ~/.vim
