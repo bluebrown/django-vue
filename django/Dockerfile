@@ -8,8 +8,7 @@ RUN   apt-get update && apt-get install -y --no-install-recommends \
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting && \
-    curl https://raw.githubusercontent.com/bluebrown/dotfiles/master/zshrc > ~/.zshrc && \
-    mkdir ~/.vim && echo 'source /application/.vimrc' > ~/.vim/vimrc
+    curl https://raw.githubusercontent.com/bluebrown/dotfiles/master/zshrc > ~/.zshrc
 
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
@@ -18,4 +17,8 @@ ENV LANG=C.UTF-8 \
 WORKDIR /application/
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
+
+COPY ./.vim /root/.vim
+RUN chmod -u+x ~/.vim/pack/fetch.sh && \
+    ~/.vim/pack/fetch.sh
 
