@@ -24,7 +24,10 @@ docker build -t yourapp:9000 .
 
 
 ## Meta
+#*Gitlab CI:** https://gitlab.com/bluebrown/django-vue/pipelines
 **Author:** Nico Braun – [@littlebluebrown](https://twitter.com/littlebluebrown) – nico-braun@live.de
+
+
 
 ## Contributing
 1. Fork it (<https://github.com/bluebrown/vim-alpine/fork>)
