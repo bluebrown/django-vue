@@ -8,7 +8,7 @@ compile_statics:
   image: node
   stage: build
   before_script:
-    - npm install -g webpack @vue/cli
+    - npm install -g webpack @vue/cli @vue/cli-service-global
   script:
     - vue build /builds/bluebrown/django-vue/vue/builder/src
   artifacts:
