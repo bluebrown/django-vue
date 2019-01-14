@@ -9,13 +9,12 @@ compile_statics:
   stage: build
   before_script:
     - npm install -g webpack @vue/cli @vue/cli-service-global
-    - mv /builds/bluebrown/django-vue/vue/builder /builder
+    - cd $CI_PROJECT_DIR/vue/builder && npm install
   script:
-    - cd /builder && npm install
-    - cd /builder/src && vue build
+    - cd $CI_PROJECT_DIR/vue/builder/src && vue build
   artifacts:
     paths:
-      - /builder/src/dist/*
+      - $CI_PROJECT_DIR/vue/builder/src/dist
 
 #run_app:
 #  image: python
