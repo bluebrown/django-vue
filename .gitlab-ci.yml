@@ -9,28 +9,25 @@ compile_statics:
   stage: build
   before_script:
     - npm install -g webpack @vue/cli @vue/cli-service-global
-    - cd $CI_PROJECT_DIR/vue/builder && npm install
+    - cd vue/builder && npm install
   script:
-    - cd $CI_PROJECT_DIR/vue/builder/src && vue build
+    - cd vue/builder/src && vue build
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/vue/builder/src/dist
+      - vue/builder/src/dist
 
-#run_app:
-#  image: python
-#  stage: test
-#  dependencies:
-#    - compile_statics
-#  before_script:
-#    - mv /builds/bluebrown/django-vue/django/application /application
-#  script:
-#    - pip install django
-#    - cp django-vue/django/application /application
-#    - cp /builder/src/dist application/static
-#    - cd /application
-#    - python manage.py runserver &
-#    - kill %1
-#  artifacts:
-#    paths:
-#      - /application
-#
+run_app:
+  image: python
+  stage: test
+  dependencies:
+    - compile_statics
+  before_script:
+   - pip install django
+   - mv vue/builder/src/dist django/application/static
+  script:
+    - cd django/application && ls static && python manage.py runserver &
+    - kill %1
+  artifacts:
+    paths:
+      - django/application
+
