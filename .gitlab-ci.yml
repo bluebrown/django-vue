@@ -15,7 +15,7 @@ compile_statics:
     - cd /builder/src && vue build
   artifacts:
     paths:
-      - /builder/src/dist/
+      - /builder/src/dist/*
 
 #run_app:
 #  image: python
