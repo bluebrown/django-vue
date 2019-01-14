@@ -17,3 +17,4 @@ RUN pip install django
 
 COPY ./django/application /application
 COPY --from=vue-builder /builder/src/dist /application/static
+
