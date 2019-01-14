@@ -7,9 +7,10 @@ stages:
 compile_statics:
   image: node
   stage: build
+  before_script:
+    - cp /builds/bluebrown/django-vue/vue/builder /builder
   script:
     - npm install -g webpack @vue/cli
-    - cp django-vue/vue/builder /builder
     - cd builder/src
     - vue build
   artifacts:
@@ -21,6 +22,8 @@ run_app:
   stage: test
   dependencies:
     - compile_statics
+  before_script:
+    - cp /builds/bluebrown/django-vue/django/application /application
   script:
     - pip install django
     - cp django-vue/django/application /application
