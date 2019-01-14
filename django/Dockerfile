@@ -13,6 +13,6 @@ ENV LANG=C.UTF-8 \
     TZ=Europe/Madrid
 
 WORKDIR /application/
-COPY ./requirements.txt .
+COPY django/requirements.txt .
 RUN pip install -r requirements.txt
 
