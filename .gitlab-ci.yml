@@ -12,7 +12,7 @@ compile_statics:
     - mv /builds/bluebrown/django-vue/vue/builder /builder
   script:
     - cd /builder && npm install
-    - cd /builder/src && npm build
+    - cd /builder/src && vue build
   artifacts:
     paths:
       - /builder/src/dist
