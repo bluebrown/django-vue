@@ -8,30 +8,28 @@ compile_statics:
   image: node
   stage: build
   before_script:
-    - mv /builds/bluebrown/django-vue/vue/builder /builder
-  script:
     - npm install -g webpack @vue/cli
-    - cd builder/src
-    - vue build
-  artifacts:
-    paths:
-      - /builder/src/dist
-
-run_app:
-  image: python
-  stage: test
-  dependencies:
-    - compile_statics
-  before_script:
-    - mv /builds/bluebrown/django-vue/django/application /application
   script:
-    - pip install django
-    - cp django-vue/django/application /application
-    - cp /builder/src/dist application/static
-    - cd /application
-    - python manage.py runserver &
-    - kill %1
+    - vue build /builds/bluebrown/django-vue/vue/builder/src
   artifacts:
     paths:
-      - /application
+      - /builds/bluebrown/django-vue/vue/builder/src/dist
 
+#run_app:
+#  image: python
+#  stage: test
+#  dependencies:
+#    - compile_statics
+#  before_script:
+#    - mv /builds/bluebrown/django-vue/django/application /application
+#  script:
+#    - pip install django
+#    - cp django-vue/django/application /application
+#    - cp /builder/src/dist application/static
+#    - cd /application
+#    - python manage.py runserver &
+#    - kill %1
+#  artifacts:
+#    paths:
+#      - /application
+#
