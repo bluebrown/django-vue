@@ -11,8 +11,8 @@ compile_statics:
     - npm install -g webpack @vue/cli @vue/cli-service-global
     - mv /builds/bluebrown/django-vue/vue/builder /builder
   script:
-    - yarn install /builder
-    - yarn build /builder
+    - cd /builder && npm install
+    - cd /src && npm build
   artifacts:
     paths:
       - /builder/src/dist
