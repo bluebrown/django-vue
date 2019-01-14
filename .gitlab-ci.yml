@@ -25,7 +25,7 @@ run_app:
    - pip install django
    - mv vue/builder/src/dist django/application/static
   script:
-    - cd django/application && ls static && python manage.py runserver &
+    - cd django/application python manage.py runserver &
     - kill %1
   artifacts:
     paths:
