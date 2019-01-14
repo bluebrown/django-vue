@@ -4,20 +4,20 @@ A dockerized end-to-end application development setup with multistage deployment
 ## Develop
 Make use of the development images to build your backend with django and statics with vue.
 
-* Spin up django and mount the application volume
+Spin up django and mount the application volume
 ```
 docker run -v ./django/application:/application \
   -P -ti --rm bluebrown/django /bin/zsh
 ```
-* Spin up the vue development image and mount te builder volume
+Spin up the vue development image and mount te builder volume
 
 ```
 docker run -v ./vue/builder:/builder \
   -P -ti --rm bluebrown/vue /bin/zsh
 ```
 ## Build
-* Use multi staging to compile the statics and assets with a vue builder image
-* pass the statics to the image containing the django application
+Use multi staging to compile the statics and assets with a vue builder image
+and pass the statics to the django application
 ```
 docker build -t yourapp:9000 .
 ```
