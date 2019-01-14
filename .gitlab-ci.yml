@@ -9,7 +9,7 @@ compile_statics:
   stage: build
   script:
     - npm install -g webpack @vue/cli
-    - cp djanggo-vue/vue/builder /builder
+    - cp django-vue/vue/builder /builder
     - cd builder/src
     - vue build
   artifacts:
