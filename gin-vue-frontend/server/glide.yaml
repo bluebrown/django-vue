@@ -1,4 +1,4 @@
-package: gitlab.com/sourcecode-safari/client
+package: server
 import:
 - package: github.com/gin-contrib/static
 - package: github.com/gin-gonic/gin
