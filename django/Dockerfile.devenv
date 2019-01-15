@@ -15,5 +15,5 @@ ENV LANG=C.UTF-8 \
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
-WORKDIR /django-rest-api/
-
+WORKDIR /django/
+CMD ["/bin/zsh"]
