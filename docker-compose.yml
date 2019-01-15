@@ -1,13 +1,13 @@
 version: "3.7"
 services:
   backend:
-    build: ./django
-    image: develin/backend
+    build: ./backend
+    image: develin/backend:prod
     ports:
       - 8000:8000
   frontend:
-    build: ./gin-vue
-    image: develin/frontend
+    build: ./frontend
+    image: develin/frontend:prod
     ports:
       - 8080:8080
 
