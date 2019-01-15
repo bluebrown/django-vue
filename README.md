@@ -1,20 +1,16 @@
 # django-vue
 A dockerized end-to-end application development setup with multistage deployment Dockerfile.
 
-## Develop
-Make use of the development images to build your backend with django and statics with vue.
+## Development
+The app consists basically out of 3 components. A rest api, a static fileserver and a frontend-framework that builds the statics and assets. Each of them has its own development environment. One possible worklow is the following:
+* Build the api
+  - spin up the django development image and mount the project repostory
+* build the statics
+  - spin up the vue development image and use the development server
 
-Spin up django and mount the application volume
-```
-docker run -v ./django/application:/application \
-  -P -ti --rm bluebrown/django /bin/zsh
-```
-Spin up the vue development image and mount te builder volume
+* build the static server
+  - spin up a gin development container and mount the project directory as well as the dist folder from the vue project
 
-```
-docker run -v ./vue/builder:/builder \
-  -P -ti --rm bluebrown/vue /bin/zsh
-```
 ## Build
 Use multi staging to compile the statics and assets with a vue builder image
 and pass the statics to the django application
@@ -24,7 +20,6 @@ docker build -t yourapp:9000 .
 
 
 ## Meta
-#*Gitlab CI:** https://gitlab.com/bluebrown/django-vue/pipelines
 **Author:** Nico Braun – [@littlebluebrown](https://twitter.com/littlebluebrown) – nico-braun@live.de
 
 
