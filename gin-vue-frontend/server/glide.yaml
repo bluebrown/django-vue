@@ -1,0 +1,5 @@
+package: gitlab.com/sourcecode-safari/client
+import:
+- package: github.com/gin-contrib/static
+- package: github.com/gin-gonic/gin
+  version: ~1.3.0
