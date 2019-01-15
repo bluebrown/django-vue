@@ -1,4 +1,3 @@
-
 FROM python
 COPY . /django/
 WORKDIR /django/
