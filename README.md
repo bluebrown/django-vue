@@ -4,24 +4,22 @@ A dockerized end-to-end application development setup with multistage deployment
 ## Development
 The app consists basically out of 3 components. A rest api, a static fileserver and a frontend-framework that builds the statics and assets. Each of them has its own development environment. One possible worklow is the following:
 * Build the api
-  - spin up the django development image and mount the project repostory
+  - spin up the django development image and mount the project repository
+  - run the api
 * build the statics
   - spin up the vue development image and use the development server
+  - build the frontend and make test calls to the api
 
 * build the static server
   - spin up a gin development container and mount the project directory as well as the dist folder from the vue project
-
+  
 ## Build
-Use multi staging to compile the statics and assets with a vue builder image
-and pass the statics to the django application
-```
-docker build -t yourapp:9000 .
-```
+In the build porcess, the multi stage Dockerfile for the gin-vue frontend gets used to build a slim static file server.
+The Django Rest API gets build into an optimized image as well. Both services are ready for testing.
 
 
 ## Meta
 **Author:** Nico Braun – [@littlebluebrown](https://twitter.com/littlebluebrown) – nico-braun@live.de
-
 
 
 ## Contributing
