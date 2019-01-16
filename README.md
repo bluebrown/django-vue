@@ -12,7 +12,7 @@ The app consists basically out of 3 components. A rest api, a static fileserver 
 
 * build the static server
   - spin up a gin development container and mount the project directory as well as the dist folder from the vue project
-  
+
 ## Build
 In the build porcess, the multi stage Dockerfile for the gin-vue frontend gets used to build a slim static file server.
 The Django Rest API gets build into an optimized image as well. Both services are ready for testing.
