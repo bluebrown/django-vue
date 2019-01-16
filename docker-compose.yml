@@ -1,13 +1,27 @@
 version: "3.7"
 services:
+
   backend:
     build: ./backend
     image: develin/backend:prod
+    restart: always
     ports:
       - 8000:8000
+
   frontend:
     build: ./frontend
     image: develin/frontend:prod
+    restart: always
     ports:
       - 8080:8080
+
+  database:
+    image: postgres
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
 
