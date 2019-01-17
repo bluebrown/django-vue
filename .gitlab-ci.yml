@@ -1,0 +1,59 @@
+# CI/CD
+# Under contruction
+stages:
+  - build
+  - test
+
+binary:
+  image: golang
+  stage: build
+  before_script:
+    - curl https://glide.sh/get | sh
+    - cp -r frontend/server /go/src/server
+    - cd /go/src/server && glide install
+  script:
+   - go fmt $(go list ./... | grep -v /vendor/)
+   - go vet $(go list ./... | grep -v /vendor/)
+   - go test -race $(go list ./... | grep -v /vendor/)
+   - go build -race -ldflags "-extldflags '-static'" -o $CI_PROJECT_DIR/serverbinary
+  artifacts:
+    paths:
+      - serverbinary
+
+statics:
+  image: node
+  stage: build
+  before_script:
+    - npm install -g webpack @vue/cli @vue/cli-service-global
+    - cd frontend/builder && npm install
+  script:
+    - cd src && vue build
+  artifacts:
+    paths:
+      - frontend/builder/src/dist
+
+frontend:
+  image: golang
+  stage: test
+  dependencies:
+    - binary
+    - statics
+  before_script:
+   - mv frontend/builder/src/dist /go/static
+   - mv serverbinary /go/bin/
+  script:
+    - cd /go/bin 
+    - serverbinary &
+    - echo "run tests"
+    - kill %1
+    
+backend:
+  image: python
+  stage: test
+  before_script:
+    - pip install -r backend/requirements.txt
+    - cd backend
+  script:
+    - python manage.py runserver '0:8000' &
+    - echo "run tests"
+    - kill %1
