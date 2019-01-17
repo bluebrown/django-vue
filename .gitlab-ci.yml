@@ -1,12 +1,12 @@
 # CI/CD
 # Under contruction
 stages:
-  - build
+  - compile
   - test
 
 binary:
   image: golang
-  stage: build
+  stage: compile
   before_script:
     - curl https://glide.sh/get | sh
     - cp -r frontend/server /go/src/server
@@ -22,7 +22,7 @@ binary:
 
 statics:
   image: node
-  stage: build
+  stage: compile
   before_script:
     - npm install -g webpack @vue/cli @vue/cli-service-global
     - cd frontend/builder && npm install
@@ -42,11 +42,11 @@ frontend:
    - mv frontend/builder/src/dist /go/static
    - mv serverbinary /go/bin/
   script:
-    - cd /go/bin 
+    - cd /go/bin
     - serverbinary &
     - echo "run tests"
     - kill %1
-    
+
 backend:
   image: python
   stage: test
@@ -57,3 +57,4 @@ backend:
     - python manage.py runserver '0:8000' &
     - echo "run tests"
     - kill %1
+
