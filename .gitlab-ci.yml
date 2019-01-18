@@ -10,14 +10,14 @@ before_script:
 build-backend:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE/backend"  ./backend
-    - docker push "$CI_REGISTRY_IMAGE/backend"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/backend:prod"  ./backend
+    - docker push "$CI_REGISTRY_IMAGE/backend:prod"
 
 build-frontend:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE/frontend"  ./frontend
-    - docker push "$CI_REGISTRY_IMAGE/frontend"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/frontend:prod"  ./frontend
+    - docker push "$CI_REGISTRY_IMAGE/frontend:prod"
     
 compose:
   stage: test
