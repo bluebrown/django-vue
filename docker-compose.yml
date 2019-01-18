@@ -3,14 +3,14 @@ services:
 
   backend:
     #build: ./backend
-    image: bluebrown/django-vue/backend:prod
+    image: registry.gitlab.com/bluebrown/django-vue/backend:prod
     restart: always
     ports:
       - 8000:8000
 
   frontend:
     #build: ./frontend
-    image: bluebrown/django-vue/frontend:prod
+    image: registry.gitlab.com/bluebrown/django-vue/frontend:prod
     restart: always
     ports:
       - 8080:8080
