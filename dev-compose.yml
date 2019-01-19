@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  backend-builder:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.devenv
+    volumes:
+      - ./backend:/backend
+  server-builder:
+    build:
+      context: ./frontend/server
+      dockerfile: Dockerfile.devenv
+    volumes:
+      - ./frontend/server:/go/src/server
+
+  statics-builder:
+    build:
+      context: ./frontend/builder
+      dockerfile: Dockerfile.devenv
+    volumes:
+      - ./frontend/builder:/builder
+
+
+
