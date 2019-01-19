@@ -6,26 +6,30 @@ services:
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
-
 build-backend:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/backend:prod"  ./backend
+    # Run tests
     - docker push "$CI_REGISTRY_IMAGE/backend:prod"
 
 build-frontend:
   stage: build
   script:
+    # I could use a seperate dockerfiles for the gitlab CI, to build the image
+    # asynchounsly as the current docker file builds the binary and statics after another.
     - docker build --pull -t "$CI_REGISTRY_IMAGE/frontend:prod"  ./frontend
+    - # Run tests
     - docker push "$CI_REGISTRY_IMAGE/frontend:prod"
-   
-compose:
-  stage: test
-  before_script:
-    - apk add --no-cache py-pip
-    - pip install docker-compose
-  script:
-    - docker-compose pull
-    - docker-compose up -d
-    - curl -H 'Accept: application/json; indent=4' -u $DJANGO_NAME:$DJANGO_PW http://127.0.0.1:8000/users/
- 
+
+
+# For now commeted out as there are no tests to run
+#compose:
+#  stage: test
+#  before_script:
+#    - apk add --no-cache py-pip
+#    - pip install docker-compose
+#  script:
+#    - docker-compose pull
+#    - docker-compose up -d
+#    - # Run tests
