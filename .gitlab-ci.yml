@@ -25,4 +25,5 @@ compose:
     - apk add --no-cache py-pip
     - pip install docker-compose
   script:
+    - docker-compose pull
     - docker-compose up -d
