@@ -15,11 +15,11 @@ build-backend:
 
 build-frontend:
   stage: build
-  script:
     # I could use a seperate dockerfiles for the gitlab CI, to build the image
     # asynchounsly as the current docker file builds the binary and statics after another.
+  script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/frontend:prod"  ./frontend
-    - # Run tests
+    # Run tests
     - docker push "$CI_REGISTRY_IMAGE/frontend:prod"
 
 
