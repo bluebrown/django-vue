@@ -1,17 +1,23 @@
 version: "3.7"
 services:
+
   backend-builder:
     build:
       context: ./backend
       dockerfile: Dockerfile.devenv
     volumes:
       - ./backend:/backend
+    ports:
+      - 8000:8000
+
   server-builder:
     build:
       context: ./frontend/server
       dockerfile: Dockerfile.devenv
     volumes:
       - ./frontend/server:/go/src/server
+    ports:
+      - 9000:8080
 
   statics-builder:
     build:
@@ -19,6 +25,13 @@ services:
       dockerfile: Dockerfile.devenv
     volumes:
       - ./frontend/builder:/builder
+    ports:
+     - 8080:8080
 
-
+  database:
+    image: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+     - 5432:5432
 
